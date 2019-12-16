@@ -1,4 +1,4 @@
-const { run, build, readAll, readFile } = Deno;
+const { run, build, readAll, readFile, env } = Deno;
 
 // Get machine ID
 // Requires `--allow-run` or `--allow-all`
@@ -44,7 +44,7 @@ function parse(bytes: Uint8Array): string {
 }
 
 async function getMachineIDWin(): Promise<string> {
-  const winDir = Deno.env()["windir"];
+  const winDir = env()["windir"];
   const ps = run({
     stdout: "piped",
     args: [

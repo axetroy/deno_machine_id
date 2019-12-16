@@ -6,7 +6,7 @@ Cross platform support
 
 ### Usage
 
-> require `--allow-run` or `--allow-all` flag
+> require `--allow-run` and `--allow-env` flag
 
 ```typescript
 import { getMachineId } from "https://lib.axetroy.xyz/github.com/axetroy/deno_machine_id/mod.ts";
