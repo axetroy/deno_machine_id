@@ -2,6 +2,8 @@
 
 Get the unique ID of the current machine
 
+Cross platform support
+
 ### Usage
 
 > require `--allow-run` or `--allow-all` flag
