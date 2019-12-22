@@ -15,4 +15,5 @@ jobs:
         with:
           deno-version: ${{ matrix.deno }}
       - run: |
+          deno fmt --check *.md *.ts
           deno test -A
