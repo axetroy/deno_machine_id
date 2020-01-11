@@ -1,8 +1,8 @@
 import {
   assert,
   assertNotEquals
-} from "https://deno.land/std@0.29.0/testing/asserts.ts";
-import { runIfMain, test } from "https://deno.land/std@0.29.0/testing/mod.ts";
+} from "https://deno.land/std@v0.29.0/testing/asserts.ts";
+import { runIfMain, test } from "https://deno.land/std@v0.29.0/testing/mod.ts";
 import { getMachineId } from "./mod.ts";
 
 function isValidId(machindId: string): boolean {
