@@ -9,9 +9,9 @@ Cross platform support
 > require `--allow-run` and `--allow-env` flag
 
 ```typescript
-import { getMachineId } from "https://deno.land/x/machine_id/mod.ts";
+import { getMachineId } from 'https://deno.land/x/machine_id@v0.2.0/mod.ts'
 
-console.log("My Machine ID: ", await getMachineId());
+console.log('My Machine ID: ', await getMachineId())
 ```
 
 ## License

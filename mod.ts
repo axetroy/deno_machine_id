@@ -56,7 +56,7 @@ async function getMachineIDWin(): Promise<string> {
     ]
   });
 
-  return parse(await readAll(ps.stdout));
+  return parse(await readAll(ps.stdout!));
 }
 
 async function getMachineIDMac(): Promise<string> {
@@ -65,7 +65,7 @@ async function getMachineIDMac(): Promise<string> {
     args: ["ioreg", "-rd1", "-c", "IOPlatformExpertDevice"]
   });
 
-  return parse(await readAll(ps.stdout));
+  return parse(await readAll(ps.stdout!));
 }
 
 async function getMachineIDLinux(): Promise<string> {

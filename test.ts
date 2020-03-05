@@ -1,9 +1,10 @@
 import {
   assert,
   assertNotEquals
-} from "https://deno.land/std@v0.29.0/testing/asserts.ts";
-import { runIfMain, test } from "https://deno.land/std@v0.29.0/testing/mod.ts";
+} from "https://deno.land/std@v0.35.0/testing/asserts.ts";
 import { getMachineId } from "./mod.ts";
+
+const { test } = Deno;
 
 function isValidId(machindId: string): boolean {
   return /^[a-z-\d]+$/i.test(machindId);
@@ -17,5 +18,3 @@ test(async function testGetMachineId() {
   assertNotEquals(id, "");
   assert(isValidId(id));
 });
-
-runIfMain(import.meta);
