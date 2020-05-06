@@ -1,14 +1,16 @@
 const { run, build, readAll, readFile, env } = Deno;
 
 // Get machine ID
-// Requires `--allow-run` or `--allow-all`
+// Permission in Windows: --allow-run --allow-env
+// Permission in MacOS: --allow-run
+// Permission in Linux: --allow-read
 export async function getMachineId(): Promise<string> {
   switch (build.os) {
     case "linux":
       return getMachineIDLinux();
-    case "win":
+    case "windows":
       return getMachineIDWin();
-    case "mac":
+    case "darwin":
       return getMachineIDMac();
     default:
       throw new Error(`Not support your operate system '${build.os}'`);
@@ -21,13 +23,13 @@ function parse(bytes: Uint8Array): string {
   switch (build.os) {
     case "linux":
       return output.trim();
-    case "win":
+    case "windows":
       return output
         .toString()
         .split("REG_SZ")[1]
         .replace(/\r+|\n+|\s+/gi, "")
         .trim();
-    case "mac":
+    case "darwin":
       const lines = output.split("\n");
       for (const line of lines) {
         // here is the match line
@@ -44,28 +46,38 @@ function parse(bytes: Uint8Array): string {
 }
 
 async function getMachineIDWin(): Promise<string> {
-  const winDir = env()["windir"];
+  const winDir = env.get("windir");
   const ps = run({
     stdout: "piped",
-    args: [
+    cmd: [
       `${winDir}\\System32\\REG.exe`,
       "QUERY",
       "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography",
       "/v",
-      "MachineGuid"
-    ]
+      "MachineGuid",
+    ],
   });
 
-  return parse(await readAll(ps.stdout!));
+  const output = await readAll(ps.stdout!);
+
+  ps.stdout?.close();
+  ps.close();
+
+  return parse(output);
 }
 
 async function getMachineIDMac(): Promise<string> {
   const ps = run({
     stdout: "piped",
-    args: ["ioreg", "-rd1", "-c", "IOPlatformExpertDevice"]
+    cmd: ["ioreg", "-rd1", "-c", "IOPlatformExpertDevice"],
   });
 
-  return parse(await readAll(ps.stdout!));
+  const output = await readAll(ps.stdout!);
+
+  ps.stdout?.close();
+  ps.close();
+
+  return parse(output);
 }
 
 async function getMachineIDLinux(): Promise<string> {
@@ -80,6 +92,6 @@ async function getMachineIDLinux(): Promise<string> {
     await readFile(dbusPath).catch(() => {
       // try fallback path
       return readFile(dbusPathEtc);
-    })
+    }),
   );
 }

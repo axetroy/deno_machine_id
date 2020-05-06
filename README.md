@@ -6,10 +6,11 @@ Cross platform support
 
 ### Usage
 
-> require `--allow-run` and `--allow-env` flag
-
 ```typescript
-import { getMachineId } from 'https://deno.land/x/machine_id@v0.2.0/mod.ts'
+// Permission in Windows: --allow-run --allow-env
+// Permission in MacOS: --allow-run
+// Permission in Linux: --allow-read
+import { getMachineId } from 'https://deno.land/x/machine_id@v0.3.0/mod.ts'
 
 console.log('My Machine ID: ', await getMachineId())
 ```
