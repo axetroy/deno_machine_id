@@ -5,7 +5,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        deno: ['v0.35.0']
+        deno: ['v1.0.0-rc1']
         os: [ubuntu-latest, macOS-latest, windows-latest]
     name: Deno ${{ matrix.deno }} test in ${{ matrix.os }}
     steps:
@@ -16,6 +16,7 @@ jobs:
           deno-version: ${{ matrix.deno }}
 
       - name: Check code format
+        if: runner.os != "Windows"
         env:
           RUST_BACKTRACE: 1
         run: |
