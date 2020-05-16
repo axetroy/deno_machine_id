@@ -13,7 +13,7 @@ export async function getMachineId(): Promise<string> {
     case "darwin":
       return getMachineIDMac();
     default:
-      throw new Error(`Not support your operate system '${build.os}'`);
+      throw new Error(`Not supported on your operating system '${build.os}'`);
   }
 }
 
