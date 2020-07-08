@@ -60,7 +60,7 @@ async function getMachineIDWin(): Promise<string> {
 
   const output = await readAll(ps.stdout!);
 
-  ps.stdout?.close();
+  ps.stdout.close();
   ps.close();
 
   return parse(output);
@@ -74,7 +74,7 @@ async function getMachineIDMac(): Promise<string> {
 
   const output = await readAll(ps.stdout!);
 
-  ps.stdout?.close();
+  ps.stdout.close();
   ps.close();
 
   return parse(output);
