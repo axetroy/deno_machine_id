@@ -30,13 +30,15 @@ function parse(bytes: Uint8Array): string {
         .replace(/\r+|\n+|\s+/gi, "")
         .trim();
     case "darwin":
-      const lines = output.split("\n");
-      for (const line of lines) {
-        // here is the match line
-        // "IOPlatformUUID" = "A8226C69-2364-5B3E-83CC-1A72D7531679"
-        if (line.indexOf("IOPlatformUUID") > 0) {
-          const [_, val] = line.split(/\s*=\s*/);
-          return val.replace(/^"|"$/g, "");
+      {
+        const lines = output.split("\n");
+        for (const line of lines) {
+          // here is the match line
+          // "IOPlatformUUID" = "A8226C69-2364-5B3E-83CC-1A72D7531679"
+          if (line.indexOf("IOPlatformUUID") > 0) {
+            const [_, val] = line.split(/\s*=\s*/);
+            return val.replace(/^"|"$/g, "");
+          }
         }
       }
       return "";
