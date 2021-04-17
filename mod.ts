@@ -4,7 +4,7 @@ const { run, build, readAll, readFile, env } = Deno;
 // Permission in Windows: --allow-run --allow-env
 // Permission in MacOS: --allow-run
 // Permission in Linux: --allow-read
-export async function getMachineId(): Promise<string> {
+export function getMachineId(): Promise<string> {
   switch (build.os) {
     case "linux":
       return getMachineIDLinux();
