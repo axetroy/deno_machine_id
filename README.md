@@ -7,12 +7,12 @@ Cross platform support
 ### Usage
 
 ```typescript
-// Permission in Windows: --allow-run --allow-env
-// Permission in MacOS: --allow-run
-// Permission in Linux: --allow-read
-import { getMachineId } from 'https://deno.land/x/machine_id@v0.3.0/mod.ts'
+// Permission in Windows: --allow-run --allow-env=$windir
+// Permission in MacOS: --allow-run=/usr/sbin/ioreg
+// Permission in Linux: --allow-read=/var/lib/dbus/machine-id,/etc/machine-id
+import { getMachineId } from "https://deno.land/x/machine_id@v0.3.0/mod.ts";
 
-console.log('My Machine ID: ', await getMachineId())
+console.log("My Machine ID: ", await getMachineId());
 ```
 
 ## License

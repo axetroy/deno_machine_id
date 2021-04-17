@@ -1,7 +1,7 @@
 import {
   assert,
   assertNotEquals,
-} from "https://deno.land/std@v0.59.0/testing/asserts.ts";
+} from "https://deno.land/std@0.93.0/testing/asserts.ts";
 import { getMachineId } from "./mod.ts";
 
 const { test } = Deno;

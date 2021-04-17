@@ -85,13 +85,13 @@ async function getMachineIDMac(): Promise<string> {
 async function getMachineIDLinux(): Promise<string> {
   // dbusPath is the default path for dbus machine id.
   const dbusPath = "/var/lib/dbus/machine-id";
-  // dbusPathEtc is the default path for dbus machine id located in /etc.
-  // Some systems (like Fedora 20) only know this path.
-  // Sometimes it's the other way round.
-  const dbusPathEtc = "/etc/machine-id";
 
   return parse(
     await readFile(dbusPath).catch(() => {
+      // dbusPathEtc is the default path for dbus machine id located in /etc.
+      // Some systems (like Fedora 20) only know this path.
+      // Sometimes it's the other way round.
+      const dbusPathEtc = "/etc/machine-id";
       // try fallback path
       return readFile(dbusPathEtc);
     }),
